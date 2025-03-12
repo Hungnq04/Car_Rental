@@ -151,81 +151,151 @@
                 background-color: #1e7e34;
                 transform: scale(0.98);
             }
+            .booked {
+                margin-top: 10px;
+                padding: 8px;
+                background-color: #ff4d4d;
+                color: white;
+                border-radius: 5px;
+                font-size: 14px;
+            }
+            .car-details {
+                width: 80%;
+                background: #fff;
+                border-radius: 10px;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+                padding: 15px;
+                text-align: center;
+            }
+
+            /* Thiết lập bảng */
+            .car-table {
+                width: 100%;
+                border-collapse: collapse;
+                font-size: 16px;
+            }
+
+            /* Header bảng */
+            .car-table th {
+                background-color: #007bff;
+                color: white;
+                padding: 10px;
+                text-align: left;
+                border-bottom: 2px solid #ddd;
+            }
+
+            /* Dòng dữ liệu */
+            .car-table td {
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+            }
+
+            /* Hiệu ứng hover */
+            .car-table tr:hover {
+                background-color: #f1f1f1;
+            }
+
+            /* Viền bảng */
+            .car-table {
+                border: 2px solid #007bff;
+                border-radius: 8px;
+                overflow: hidden;
+            }
+
         </style>
     </head>
     <body>
-        <form>
-            <form action="checkAvailableCar">
-                <div class="date-container">
-                    <label for="date">Select day:</label>
-                    <input type="date" id="date" name="date" value="${requestScope.date}"/>
-                    <input type="submit" value="Confirm"/>
-                </div>
-            </form>
 
-            <center>
-                <div class="car-list">
-                    <c:forEach var="entry" items="${requestScope.listCar}">
-                        <c:set var="car" value="${entry.value}"/>
-                        <div class="car-container">
-                            <!-- Phần hình ảnh xe -->
-                            <div class="car-image">
-                                <img src="${car.imageLink}" alt="Car Image"/>
-                            </div>
-                            <!-- Phần thông tin xe -->
-                            <div class="car-info">
-                                <table>
-                                    <tr>
-                                        <td><strong>Brand:</strong></td>
-                                        <td>${car.brand}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Model:</strong></td>
-                                        <td>${car.model}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Seats:</strong></td>
-                                        <td>${car.seats}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Price:</strong></td>
-                                        <td>${car.price} VND / Day</td>
-                                    </tr>
-                                </table>
-                                <!-- Nút Booking -->
-                                <c:set var="isFullyRented" value="false"/>
-                                <c:forEach var="id" items="${requestScope.VehicleIDHaveCHeckedDate}">
-                                    <c:if test="${id eq car.VehicleID}">
-                                        <c:set var="isFullyRented" value="true"/>
-                                    </c:if>
-                                </c:forEach>
-
-                                <c:choose>
-                                    <c:when test="${isFullyRented}">
-                                        <div class="fully-rented"><a>Fully Rented</a></div>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <form action="booking.jsp" method="get">
-                                            <input type="hidden" name="vehicleId" value="${entry.key}"/>
-                                            <button type="submit" class="booking-button">Booking</button>
-                                        </form>
-                                    </c:otherwise>
-                                </c:choose>
-                            </div>
-                        </div>
-                    </c:forEach>
-                </div>
-                <div>
-                    <table>
-                        <tr>
-                            <td>Brand</td>
-                            <td>Model</td>
-                            <td>Seats</td>
-                            <td>Price</td>
-                        </tr>
-                    </table>
-                </div>
-            </center>
+        <form action="checkAvailableCar">
+            <div class="date-container">
+                <label for="date">Select day:</label>
+                <input type="date" id="date" name="date" value="${requestScope.date}"/>
+                <input type="submit" value="Confirm"/>
+            </div>
         </form>
-    </body>
+
+    <center>
+        <div class="car-list">
+            <c:forEach var="entry" items="${requestScope.listCar}">
+                <c:set var="car" value="${entry.value}"/>
+                <div class="car-container">
+                    <!-- Phần hình ảnh xe -->
+                    <div class="car-image">
+                        <img src="${car.imageLink}" alt="Car Image"/>
+                    </div>
+                    <!-- Phần thông tin xe -->
+                    <div class="car-info">
+                        <table>
+                            <tr>
+                                <td><strong>Brand:</strong></td>
+                                <td>${car.brand}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Model:</strong></td>
+                                <td>${car.model}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Seats:</strong></td>
+                                <td>${car.seats}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Price:</strong></td>
+                                <td>${car.price} VND / Day</td>
+                            </tr>
+                        </table>
+                        <!-- Nút Booking -->
+                        <c:set var="isFullyRented" value="false"/>
+                        <c:set var="isBooked" value="false"/>
+                        <c:forEach var="id" items="${requestScope.VehicleIDHaveCHeckedDate}">
+                            <c:if test="${id eq car.VehicleID}">
+                                <c:set var="isFullyRented" value="true"/>
+                            </c:if>
+                        </c:forEach>
+                        <c:forEach var="bookedCar" items="${sessionScope.listBookedCar}">
+                            <c:if test="${bookedCar.getVehicleID() eq car.getVehicleID()}">
+                                <c:set var="isBooked" value="true"/>
+                            </c:if>
+                        </c:forEach>
+
+                        <c:choose>
+                            <c:when test="${isFullyRented}">
+                                <div class="fully-rented"><a>Fully Rented</a></div>
+                            </c:when>
+                            <c:when test="${isBooked}">
+                                <div class="booked"><a>Booked</a></div>
+                            </c:when>
+                            <c:otherwise>
+                                <form action="orderTmp">
+                                    <input type="hidden" name="date" value="${requestScope.date}"/>
+                                    <input type="hidden" name="vehicleId" value="${car.getVehicleID()}"/>
+                                    <button type="submit" class="booking-button">Booking</button>
+                                </form>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
+        <c:if test="${sessionScope.listBookedCar!=null}">
+            <div class="car-details">
+                <table class="car-table">
+                    <tr>
+                        <th>Brand</th>
+                        <th>Model</th>
+                        <th>Seats</th>
+                        <th>Price</th>
+                    </tr>
+                    <c:forEach var="car" items="${sessionScope.listBookedCar}">
+                        <tr>
+                            <td>${car.getBrand()}</td>
+                            <td>${car.getModel()}</td>
+                            <td>${car.getSeats()}</td>
+                            <td>${car.getPrice()}</td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
+        </c:if>
+    </center>
+</body>
 </html>

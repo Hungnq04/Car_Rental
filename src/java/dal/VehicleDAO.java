@@ -39,4 +39,26 @@ public class VehicleDAO extends DBContext{
         }
         return list;
     }
+    
+    public Vehicles getVehicleById(int id) {
+        try {
+            String sql = "Select * from Vehicles where VehicleID = " + id;
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                Vehicles car = new Vehicles();
+                car.setVehicleID(rs.getInt("VehicleID"));
+                car.setBrand(rs.getString("Brand"));
+                car.setModel(rs.getString("Model"));
+                car.setSeats(rs.getInt("Seats"));
+                car.setPrice(rs.getFloat("Price"));
+                car.setImageLink(rs.getString("ImageLink"));
+                return car;
+            }
+            rs.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
 }

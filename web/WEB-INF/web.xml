@@ -12,6 +12,10 @@
         <servlet-name>checkAvailableCar</servlet-name>
         <servlet-class>controller.checkAvailableCar</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>OrderTmp</servlet-name>
+        <servlet-class>controller.OrderTmp</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddAccount</servlet-name>
         <url-pattern>/addAccount</url-pattern>
@@ -23,5 +27,9 @@
     <servlet-mapping>
         <servlet-name>checkAvailableCar</servlet-name>
         <url-pattern>/checkAvailableCar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderTmp</servlet-name>
+        <url-pattern>/orderTmp</url-pattern>
     </servlet-mapping>
 </web-app>
