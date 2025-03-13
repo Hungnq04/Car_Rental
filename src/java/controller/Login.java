@@ -16,7 +16,7 @@ import model.Accounts;
 
 /**
  *
- * @author chang
+ * @author Hung
  */
 public class Login extends HttpServlet {
 
@@ -76,19 +76,31 @@ public class Login extends HttpServlet {
         if (request.getParameter("login") != null) {
             String u = request.getParameter("user");
             String p = request.getParameter("pass");
+
+            if (u == null || p == null || u.trim().isEmpty() || p.trim().isEmpty()) {
+                request.setAttribute("ms", "Username and password cannot be empty");
+                request.setAttribute("user", u); // Giữ lại username nhưng không giữ mật khẩu
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+                return;
+            }
+            u = u.trim();
+            p = p.trim();
+
             AccountDAO aDAO = new AccountDAO();
             Accounts a = aDAO.check(u, p);
+
             if (a == null) {
-                request.setAttribute("ms", "username or password invalid");
+                request.setAttribute("ms", "Username or password invalid");
+                request.setAttribute("user", u);
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             } else {
                 HttpSession session = request.getSession();
                 session.setAttribute("account", a);
+
                 response.sendRedirect("home.jsp");
             }
-        }
-        else if(request.getParameter("register")!=null){
-            
+        } else if (request.getParameter("register") != null) {
+            response.sendRedirect("register.jsp");
         }
     }
 

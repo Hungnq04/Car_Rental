@@ -61,6 +61,7 @@ public class AccountDAO extends DBContext{
                 acc.setEmail(rs.getString("Email"));
                 acc.setRoleID(rs.getInt("RoleID"));
                 acc.setRoleName(rs.getString("RoleName"));
+                return acc;
             }
         } catch (Exception e) {
             
@@ -68,16 +69,15 @@ public class AccountDAO extends DBContext{
         return null;
     }
     
-    public void addAccount(int UserID, String Username, String Password, String Phone, String Email,int RoleID) {
+    public void addAccount(String Username, String Password, String Phone, String Email,int RoleID) {
         try {
-            String sql = "insert into Categories (UserID,Username,Password,Phone,Email,RoleID) values (?,?,?,?,?,?)";
+            String sql = "insert into Users (Username,Password,Phone,Email,RoleID) values (?,?,?,?,?)";
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, UserID);
-            st.setString(2, Username);
-            st.setString(3, Password);
-            st.setString(4, Phone);
-            st.setString(5, Email);
-            st.setInt(6, RoleID);
+            st.setString(1, Username);
+            st.setString(2, Password);
+            st.setString(3, Phone);
+            st.setString(4, Email);
+            st.setInt(5, RoleID);
             st.executeUpdate();
             st.close();
         } catch (Exception e) {

@@ -1,0 +1,69 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Mar 13, 2025, 11:16:48 PM
+    Author     : Hung
+*/
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container chứa form */
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    text-align: center;
+}
+
+/* Tiêu đề */
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Ô nhập liệu */
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Nút bấm */
+input[type="submit"] {
+    background-color: lightskyblue;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+input[type="submit"]:hover {
+    background-color: deepskyblue;
+}
+
+/* Thông báo lỗi */
+.error-message {
+    color: red;
+    font-size: 16px;
+    margin: 10px 0;
+}

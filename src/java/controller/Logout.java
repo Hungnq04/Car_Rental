@@ -11,13 +11,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import dal.AccountDAO;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
- * @author Hung
+ * @author chang
  */
-public class AddAccount extends HttpServlet {
+public class Logout extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -34,10 +34,10 @@ public class AddAccount extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddAccount</title>");  
+            out.println("<title>Servlet Logout</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddAccount at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet Logout at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -55,13 +55,11 @@ public class AddAccount extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         //processRequest(request, response);
-        String phone = request.getParameter("phone");
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String email = request.getParameter("email");
-        AccountDAO aDAO = new AccountDAO();
-        aDAO.addAccount( username, password, phone, email, 1);
-        response.sendRedirect("login.jsp");
+        HttpSession session=request.getSession();
+        if(session.getAttribute("account")!=null){
+            session.removeAttribute("account");
+        }
+        response.sendRedirect("home.jsp");
     } 
 
     /** 

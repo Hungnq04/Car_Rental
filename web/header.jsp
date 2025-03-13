@@ -1,16 +1,21 @@
-<%-- 
-    Document   : header
-    Created on : Mar 9, 2025, 1:16:04 AM
-    Author     : chang
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Home</title>
         <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: Arial, sans-serif;
+            }
+
             .header {
                 background-color: lightskyblue;
                 color: white;
@@ -21,26 +26,31 @@
                 box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
                 font-size: 24px;
                 font-weight: bold;
-
-                /* Cố định header trên cùng */
                 position: fixed;
                 top: 0;
                 left: 0;
                 width: 100%;
-                z-index: 1000; /* Đảm bảo header hiển thị trên các phần khác */
+                z-index: 1000;
             }
+
             .nav-bar {
                 display: flex;
                 align-items: center;
-                gap: 20px;
+                justify-content: space-between;
                 width: 100%;
+                max-width: 1200px;
+                margin: 0 auto;
             }
+
             .nav-left {
-                margin-right: 560px;
+                flex-grow: 1;
             }
+
             .nav-right {
-                margin-left: 560px;
+                display: flex;
+                gap: 15px;
             }
+
             .nav-bar a {
                 color: white;
                 text-decoration: none;
@@ -50,13 +60,14 @@
                 transition: background-color 0.3s;
                 font-size: 22px;
             }
+
             .nav-bar a:hover {
                 background-color: rgba(255, 255, 255, 0.2);
             }
 
-            /* Tạo khoảng trống cho nội dung không bị che */
+            /* Tạo khoảng trống để không bị che */
             .content {
-                margin-top: 80px; /* Căn chỉnh theo chiều cao của header */
+                margin-top: 80px;
             }
         </style>
     </head>
@@ -69,8 +80,16 @@
                 </div>
                 <!-- Login & Register bên phải -->
                 <div class="nav-right">
-                    <a href="register.jsp">Register</a>
-                    <a href="login.jsp">Login</a>
+                    <c:choose>
+                        <c:when test="${sessionScope.account == null}">
+                            <a href="register.jsp">Register</a>
+                            <a href="login.jsp">Login</a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="viewMyAccount.jsp">View My Account</a>
+                            <a href="logout">Logout</a>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </div>
