@@ -295,6 +295,12 @@
                     </c:forEach>
                 </table>
             </div>
+            <form action="addOrder">
+                <c:forEach var="car" items="${sessionScope.listBookedCar}">
+                    <input type="hidden" name="listBookedCar" value="${car}">
+                </c:forEach>
+                <input type="submit" value="Confirm"/>
+            </form>
         </c:if>
     </center>
 </body>

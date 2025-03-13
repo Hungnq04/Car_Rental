@@ -16,6 +16,10 @@
         <servlet-name>OrderTmp</servlet-name>
         <servlet-class>controller.OrderTmp</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>controller.Login</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddAccount</servlet-name>
         <url-pattern>/addAccount</url-pattern>
@@ -31,5 +35,9 @@
     <servlet-mapping>
         <servlet-name>OrderTmp</servlet-name>
         <url-pattern>/orderTmp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/login</url-pattern>
     </servlet-mapping>
 </web-app>

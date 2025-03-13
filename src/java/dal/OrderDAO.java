@@ -4,6 +4,7 @@
  */
 package dal;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.HashMap;
@@ -35,5 +36,20 @@ public class OrderDAO extends DBContext{
             System.out.println(e.getMessage());
         }
         return list;
+    }
+    
+    public void AddOrder(String date, String status, int UserID) {
+        try {
+            java.sql.Date sqlDate = java.sql.Date.valueOf(date);
+            String sql = "insert into Orders (Date,Status,UserID) values (?,?,?)";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setDate(1, sqlDate);
+            st.setString(2, status);
+            st.setInt(3, UserID);
+            st.executeUpdate();
+            st.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

@@ -69,8 +69,8 @@
                 </div>
                 <!-- Login & Register bên phải -->
                 <div class="nav-right">
-                    <a href="login.jsp">Register</a>
-                    <a href="register.jsp">Login</a>
+                    <a href="register.jsp">Register</a>
+                    <a href="login.jsp">Login</a>
                 </div>
             </div>
         </div>
