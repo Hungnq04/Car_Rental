@@ -18,15 +18,11 @@
 <%@page import="java.util.HashMap;" %>
 <%@page import="java.util.Map;" %>
 <%@page import="model.Accounts" %>
+<%@include file="js/payment.js" %>
 <!DOCTYPE html>
 <html>
     <head>
         <title>My Orders</title>
-        <script type="text/javascript">
-            function doPayment(orderID){
-                window.location = "payment?orderID="+orderID;
-            }
-        </script>
         <style>
             table {
                 width: 100%;
