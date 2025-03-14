@@ -86,7 +86,8 @@
                             <a href="login.jsp">Login</a>
                         </c:when>
                         <c:otherwise>
-                            <a href="viewMyAccount.jsp">View My Account</a>
+                            <a href="myOrder">My Order</a>
+                            <a href="viewMyAccount.jsp">My Account</a>
                             <a href="logout">Logout</a>
                         </c:otherwise>
                     </c:choose>

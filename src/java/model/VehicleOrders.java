@@ -18,16 +18,11 @@ public class VehicleOrders {
     private String Brand;
     private String Model;
     private int Seats;
-    private float Price;
-    private String ImageLink;
-    private Date Date;
-    private String OrderStatus;
-    private int UserID;
 
     public VehicleOrders() {
     }
 
-    public VehicleOrders(int VehicleOrderID, int VehicleID, String WithDriver, int OrderID, String Brand, String Model, int Seats, float Price, String ImageLink, Date Date, String OrderStatus, int UserID) {
+    public VehicleOrders(int VehicleOrderID, int VehicleID, String WithDriver, int OrderID, String Brand, String Model, int Seats) {
         this.VehicleOrderID = VehicleOrderID;
         this.VehicleID = VehicleID;
         this.WithDriver = WithDriver;
@@ -35,11 +30,6 @@ public class VehicleOrders {
         this.Brand = Brand;
         this.Model = Model;
         this.Seats = Seats;
-        this.Price = Price;
-        this.ImageLink = ImageLink;
-        this.Date = Date;
-        this.OrderStatus = OrderStatus;
-        this.UserID = UserID;
     }
 
     public String getBrand() {
@@ -64,46 +54,6 @@ public class VehicleOrders {
 
     public void setSeats(int Seats) {
         this.Seats = Seats;
-    }
-
-    public float getPrice() {
-        return Price;
-    }
-
-    public void setPrice(float Price) {
-        this.Price = Price;
-    }
-
-    public String getImageLink() {
-        return ImageLink;
-    }
-
-    public void setImageLink(String ImageLink) {
-        this.ImageLink = ImageLink;
-    }
-
-    public Date getDate() {
-        return Date;
-    }
-
-    public void setDate(Date Date) {
-        this.Date = Date;
-    }
-
-    public String getOrderStatus() {
-        return OrderStatus;
-    }
-
-    public void setOrderStatus(String OrderStatus) {
-        this.OrderStatus = OrderStatus;
-    }
-
-    public int getUserID() {
-        return UserID;
-    }
-
-    public void setUserID(int UserID) {
-        this.UserID = UserID;
     }
 
     public int getVehicleOrderID() {

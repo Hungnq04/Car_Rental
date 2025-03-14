@@ -1,7 +1,7 @@
 <%-- 
     Document   : Order
     Created on : Mar 10, 2025, 11:41:08 PM
-    Author     : chang
+    Author     : Hung
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -114,6 +114,7 @@
                         </c:forEach>
                     </table>
                 </div>
+                <a class="total-amount">Total amount payable: ${requestScope.totalAmount}</a>
                 <input type="hidden" name="date" value="${requestScope.date}"/>
                 <input type="hidden" name="userID" value="${sessionScope.account.getUserID()}"/>
                 <input type="submit" value="Confirm"/>

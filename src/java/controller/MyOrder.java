@@ -4,7 +4,7 @@
  */
 package controller;
 
-import dal.BillDAO;
+import dal.OrderDAO;
 import dal.OrderDetailDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,18 +12,17 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import dal.VehicleDAO;
-import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import model.Vehicles;
+import model.Orders;
+import model.VehicleOrders;
+import model.Accounts;
 
 /**
  *
  * @author Hung
  */
-public class OrderTmp extends HttpServlet {
+public class MyOrder extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,10 +41,10 @@ public class OrderTmp extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet OrderTMP</title>");
+            out.println("<title>Servlet MyOrder</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet OrderTMP at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet MyOrder at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,31 +62,18 @@ public class OrderTmp extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        int vehicleID = Integer.parseInt(request.getParameter("vehicleId"));
-        VehicleDAO vDAO = new VehicleDAO();
-        Vehicles car = vDAO.getVehicleById(vehicleID);
+        OrderDAO orderDAO = new OrderDAO();
+        Accounts a = (Accounts)request.getSession().getAttribute("account");
 
-        HttpSession session = request.getSession();
-        ArrayList<Vehicles> listBookedCar = (ArrayList<Vehicles>) session.getAttribute("listBookedCar");
+        Map<Integer, Orders> listOrders = orderDAO.getAllMyOrders(a.getUserID());
 
-        if (listBookedCar == null) {
-            listBookedCar = new ArrayList<>();
-            session.setAttribute("listBookedCar", listBookedCar);
-        }
-        listBookedCar.add(car);
-        session.setAttribute("listBookedCar", listBookedCar);
+        OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
+        Map<Integer, List<VehicleOrders>> vehicleOrdersMap = orderDetailDAO.getVehiclesForOrders(listOrders.keySet());
 
-        String date = request.getParameter("date");
-        OrderDetailDAO odDAO = new OrderDetailDAO();
-        ArrayList<Integer> VehicleIDHaveCHeckedDate = odDAO.VehicleIDHaveCHeckedDate(date);
-        request.setAttribute("VehicleIDHaveCHeckedDate", VehicleIDHaveCHeckedDate);
-        request.setAttribute("date", date);
+        request.setAttribute("listOrders", listOrders);
+        request.setAttribute("vehicleOrdersMap", vehicleOrdersMap);
 
-        VehicleDAO cDAO = new VehicleDAO();
-        Map<Integer, Vehicles> listCar = cDAO.getAllVehicles();
-        request.setAttribute("listCar", listCar);
-        request.getRequestDispatcher("order.jsp").forward(request, response);
+        request.getRequestDispatcher("orders.jsp").forward(request, response);
     }
 
     /**

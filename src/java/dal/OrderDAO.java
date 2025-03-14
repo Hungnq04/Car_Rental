@@ -13,10 +13,10 @@ import model.Orders;
 
 /**
  *
- * @author chang
+ * @author Hung
  */
-public class OrderDAO extends DBContext{
-    
+public class OrderDAO extends DBContext {
+
     public Map<Integer, Orders> getAllOrders() {
         Map<Integer, Orders> list = new HashMap<>();
         try {
@@ -37,7 +37,7 @@ public class OrderDAO extends DBContext{
         }
         return list;
     }
-    
+
     public int AddOrder(String date, String status, int UserID) {
         int OrderID = -1;
         try {
@@ -48,8 +48,8 @@ public class OrderDAO extends DBContext{
             st.setString(2, status);
             st.setInt(3, UserID);
             st.executeUpdate();
-            try(ResultSet rs = st.getGeneratedKeys()){
-                if(rs.next()){
+            try (ResultSet rs = st.getGeneratedKeys()) {
+                if (rs.next()) {
                     OrderID = rs.getInt(1);
                 }
             }
@@ -58,5 +58,42 @@ public class OrderDAO extends DBContext{
             System.out.println(e.getMessage());
         }
         return OrderID;
+    }
+
+    public void changeStatus(int orderID) {
+        String status = "Completed";
+        try {
+            String sql = "UPDATE Orders SET Status = ? WHERE OrderID = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(2, orderID);
+            st.setString(1, status);
+            st.executeUpdate();
+            st.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public Map<Integer, Orders> getAllMyOrders(int userID) {
+        Map<Integer, Orders> list = new HashMap<>();
+        try {
+            String sql = "SELECT * FROM Orders WHERE UserID = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, userID);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Orders order = new Orders();
+                order.setOrderID(rs.getInt("OrderID"));
+                order.setDate(rs.getDate("Date"));
+                order.setOrderStatus(rs.getString("Status"));
+                list.put(order.getOrderID(), order);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }

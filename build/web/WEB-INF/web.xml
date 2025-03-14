@@ -28,6 +28,14 @@
         <servlet-name>addOrder</servlet-name>
         <servlet-class>controller.addOrder</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Payment</servlet-name>
+        <servlet-class>controller.Paid</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MyOrder</servlet-name>
+        <servlet-class>controller.MyOrder</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddAccount</servlet-name>
         <url-pattern>/addAccount</url-pattern>
@@ -55,5 +63,13 @@
     <servlet-mapping>
         <servlet-name>addOrder</servlet-name>
         <url-pattern>/addOrder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Payment</servlet-name>
+        <url-pattern>/payment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MyOrder</servlet-name>
+        <url-pattern>/myOrder</url-pattern>
     </servlet-mapping>
 </web-app>

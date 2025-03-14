@@ -16,9 +16,10 @@ import java.util.ArrayList;
 import model.Vehicles;
 import dal.OrderDAO;
 import dal.OrderDetailDAO;
+import dal.BillDAO;
 /**
  *
- * @author chang
+ * @author Hung
  */
 public class addOrder extends HttpServlet {
    
@@ -63,8 +64,8 @@ public class addOrder extends HttpServlet {
         OrderDAO oDAO = new OrderDAO();
         String date = request.getParameter("date");
         int userID = Integer.parseInt(request.getParameter("userID"));
-        String status = "Pending";
-        int orderID = oDAO.AddOrder(date, status, userID);
+        String OrderStatus = "Pending";
+        int orderID = oDAO.AddOrder(date, OrderStatus, userID);
         
         HttpSession session1 = request.getSession();
         session1.setAttribute("orderID", orderID);
@@ -76,6 +77,20 @@ public class addOrder extends HttpServlet {
             String withDriver = withDriverOptions[i];
             odDAO.AddOrderDetail(vehicleId, withDriver, orderID);
         }
+        
+        float totalAmount = 0;
+        for(Vehicles car : listCar){
+            if(odDAO.getWithDriver(orderID, car.getVehicleID()).equals("Yes")){
+                totalAmount += car.getPrice() * 1.4;
+            }
+            else totalAmount += car.getPrice();
+        }
+        request.setAttribute("totalAmount", totalAmount);
+        String BillStatus = "Unpaid";
+        BillDAO bDAO = new BillDAO();
+        bDAO.AddBill(orderID, totalAmount, BillStatus);
+        request.setAttribute("OrderID", orderID);
+        request.getRequestDispatcher("payment.jsp").forward(request, response);
     } 
 
     /** 
