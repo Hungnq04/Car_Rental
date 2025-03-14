@@ -38,7 +38,8 @@ public class OrderDAO extends DBContext{
         return list;
     }
     
-    public void AddOrder(String date, String status, int UserID) {
+    public int AddOrder(String date, String status, int UserID) {
+        int OrderID = -1;
         try {
             java.sql.Date sqlDate = java.sql.Date.valueOf(date);
             String sql = "insert into Orders (Date,Status,UserID) values (?,?,?)";
@@ -47,9 +48,15 @@ public class OrderDAO extends DBContext{
             st.setString(2, status);
             st.setInt(3, UserID);
             st.executeUpdate();
+            try(ResultSet rs = st.getGeneratedKeys()){
+                if(rs.next()){
+                    OrderID = rs.getInt(1);
+                }
+            }
             st.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        return OrderID;
     }
 }

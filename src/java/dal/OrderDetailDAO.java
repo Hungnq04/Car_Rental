@@ -79,5 +79,18 @@ public class OrderDetailDAO extends DBContext {
         }
         return list;
     }
-
+    
+    public void AddOrderDetail(int vehicleID, String withDriver, int orderID) {
+        try {
+            String sql = "insert into VehicleOrders (VehicleID,WithDriver,OrderID) values (?,?,?)";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, vehicleID);
+            st.setString(2, withDriver);
+            st.setInt(3, orderID);
+            st.executeUpdate();
+            st.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

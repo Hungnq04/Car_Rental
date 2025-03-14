@@ -24,6 +24,10 @@
         <servlet-name>Logout</servlet-name>
         <servlet-class>controller.Logout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>addOrder</servlet-name>
+        <servlet-class>controller.addOrder</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddAccount</servlet-name>
         <url-pattern>/addAccount</url-pattern>
@@ -47,5 +51,9 @@
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addOrder</servlet-name>
+        <url-pattern>/addOrder</url-pattern>
     </servlet-mapping>
 </web-app>

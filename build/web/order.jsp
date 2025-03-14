@@ -87,28 +87,35 @@
             </c:forEach>
         </div>
         <c:if test="${sessionScope.listBookedCar!=null}">
-            <div class="car-details">
-                <table class="car-table">
-                    <tr>
-                        <th>Brand</th>
-                        <th>Model</th>
-                        <th>Seats</th>
-                        <th>Price</th>
-                    </tr>
-                    <c:forEach var="car" items="${sessionScope.listBookedCar}">
-                        <tr>
-                            <td>${car.getBrand()}</td>
-                            <td>${car.getModel()}</td>
-                            <td>${car.getSeats()}</td>
-                            <td>${car.getPrice()}</td>
-                        </tr>
-                    </c:forEach>
-                </table>
-            </div>
             <form action="addOrder">
-                <c:forEach var="car" items="${sessionScope.listBookedCar}">
-                    <input type="hidden" name="listBookedCar" value="${car}">
-                </c:forEach>
+                <div class="car-details">
+                    <table class="car-table">
+                        <tr>
+                            <th>Brand</th>
+                            <th>Model</th>
+                            <th>Seats</th>
+                            <th>Price</th>
+                            <th>With Driver</th>
+                        </tr>
+                        <c:forEach var="car" items="${sessionScope.listBookedCar}">
+                            <tr>
+                                <td>${car.brance}</td>
+                                <td>${car.model}</td>
+                                <td>${car.seats}</td>
+                                <td>${car.price}</td>
+                                <td>
+                                    <select name="withDriver">
+                                        <option value="No">No</option>
+                                        <option value="Yes">Yes</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <input type="hidden" name="vehicleId" value="${car.vehicleID}">
+                        </c:forEach>
+                    </table>
+                </div>
+                <input type="hidden" name="date" value="${requestScope.date}"/>
+                <input type="hidden" name="userID" value="${sessionScope.account.getUserID()}"/>
                 <input type="submit" value="Confirm"/>
             </form>
         </c:if>
