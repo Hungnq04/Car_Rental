@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="header.jsp" %>
 <!DOCTYPE html>
 <html>
@@ -14,12 +15,16 @@
         <link rel="stylesheet" href="css/payment.css"/>
     </head>
     <body>
-        <h2 class="total-amount">Total amount payable: ${requestScope.totalAmount}</h2>
-        <form action="payment" method="post">
-            <input type="hidden" name="orderID" value="${requestScope.OrderID}"/>
-            <input type="submit" value="Pay" class="submit-btn"/>
-        </form>
-        <h3 class="message">${requestScope.ms}</h3>
-        
+        <div class="container">
+            <h2 class="total-amount">Total amount payable: ${requestScope.totalAmount}</h2>
+            <form action="pay" method="post">
+                <input type="hidden" name="orderID" value="${requestScope.OrderID}"/>
+                <input type="hidden" name="totalAmount" value="${requestScope.totalAmount}"/>
+                <c:if test="${empty requestScope.ms}">
+                    <input type="submit" value="Pay" class="submit-btn"/>
+                </c:if>          
+            </form>
+            <h3 class="message">${requestScope.ms}</h3>
+        </div>
     </body>
 </html>

@@ -30,11 +30,23 @@
     </servlet>
     <servlet>
         <servlet-name>Payment</servlet-name>
-        <servlet-class>controller.Paid</servlet-class>
+        <servlet-class>controller.Payment</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>MyOrder</servlet-name>
         <servlet-class>controller.MyOrder</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PayPage</servlet-name>
+        <servlet-class>controller.PayPage</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deleteOrder</servlet-name>
+        <servlet-class>controller.deleteOrder</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>checkValidOrder</servlet-name>
+        <servlet-class>controller.checkValidOrder</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AddAccount</servlet-name>
@@ -72,4 +84,19 @@
         <servlet-name>MyOrder</servlet-name>
         <url-pattern>/myOrder</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PayPage</servlet-name>
+        <url-pattern>/pay</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteOrder</servlet-name>
+        <url-pattern>/deleteOrder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>checkValidOrder</servlet-name>
+        <url-pattern>/checkValidOrder</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
 </web-app>

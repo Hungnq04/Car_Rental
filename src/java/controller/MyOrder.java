@@ -73,7 +73,7 @@ public class MyOrder extends HttpServlet {
         request.setAttribute("listOrders", listOrders);
         request.setAttribute("vehicleOrdersMap", vehicleOrdersMap);
 
-        request.getRequestDispatcher("orders.jsp").forward(request, response);
+        request.getRequestDispatcher("myOrder.jsp").forward(request, response);
     }
 
     /**

@@ -3,21 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Code/Car_Rental/Car_Rental/src/java/model/VehicleOrders.java</file>
-            <file>file:/E:/Code/Car_Rental/Car_Rental/src/java/dal/VehicleDAO.java</file>
+            <file>file:/E:/Code/Car_Rental/Car_Rental/src/java/controller/addOrder.java</file>
             <file>file:/E:/Code/Car_Rental/Car_Rental/src/java/dal/OrderDAO.java</file>
-            <file>file:/E:/Code/Car_Rental/Car_Rental/src/java/controller/Login.java</file>
+            <file>file:/E:/Code/Car_Rental/Car_Rental/src/java/dal/BillDAO.java</file>
+            <file>file:/E:/Code/Car_Rental/Car_Rental/src/java/controller/PayPage.java</file>
+            <file>file:/E:/Code/Car_Rental/Car_Rental/web/order.jsp</file>
             <file>file:/E:/Code/Car_Rental/Car_Rental/src/java/controller/OrderTmp.java</file>
             <file>file:/E:/Code/Car_Rental/Car_Rental/src/java/dal/OrderDetailDAO.java</file>
+            <file>file:/E:/Code/Car_Rental/Car_Rental/web/css/order.css</file>
             <file>file:/E:/Code/Car_Rental/Car_Rental/web/home.jsp</file>
-            <file>file:/E:/Code/Car_Rental/Car_Rental/web/js/payment.js</file>
-            <file>file:/E:/Code/Car_Rental/Car_Rental/web/myOrder.jsp</file>
-            <file>file:/E:/Code/Car_Rental/Car_Rental/src/java/controller/addOrder.java</file>
-            <file>file:/E:/Code/Car_Rental/Car_Rental/src/java/dal/BillDAO.java</file>
-            <file>file:/E:/Code/Car_Rental/Car_Rental/web/order.jsp</file>
             <file>file:/E:/Code/Car_Rental/Car_Rental/web/payment.jsp</file>
-            <file>file:/E:/Code/Car_Rental/Car_Rental/src/java/controller/Paid.java</file>
-            <file>file:/E:/Code/Car_Rental/Car_Rental/src/java/controller/MyOrder.java</file>
+            <file>file:/E:/Code/Car_Rental/Car_Rental/web/css/payment.css</file>
+            <file>file:/E:/Code/Car_Rental/Car_Rental/src/java/controller/checkAvailableCar.java</file>
         </group>
     </open-files>
 </project-private>

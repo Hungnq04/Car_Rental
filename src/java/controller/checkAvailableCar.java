@@ -17,13 +17,14 @@ import java.util.HashMap;
 import java.util.Map;
 import dal.OrderDetailDAO;
 import dal.VehicleDAO;
+import jakarta.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.Date;
 import model.Vehicles;
 
 /**
  *
- * @author chang
+ * @author Hung
  */
 public class checkAvailableCar extends HttpServlet {
 
@@ -66,12 +67,14 @@ public class checkAvailableCar extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+        HttpSession session = request.getSession();
         String date = request.getParameter("date");
         OrderDetailDAO odDAO = new OrderDetailDAO();
-        ArrayList<Integer> VehicleIDHaveCHeckedDate = odDAO.VehicleIDHaveCHeckedDate(date);
-        request.setAttribute("VehicleIDHaveCHeckedDate", VehicleIDHaveCHeckedDate);
-        request.setAttribute("date", date);
+        ArrayList<Integer> VehicleIDHaveCheckedDate = odDAO.VehicleIDHaveCheckedDate(date);
+        session.setAttribute("VehicleIDHaveCheckedDate", VehicleIDHaveCheckedDate);
         
+        session.setAttribute("date", date);
+
         VehicleDAO cDAO = new VehicleDAO();
         Map<Integer, Vehicles> listCar = cDAO.getAllVehicles();
         request.setAttribute("listCar", listCar);
@@ -90,13 +93,14 @@ public class checkAvailableCar extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+        HttpSession session = request.getSession();
         OrderDetailDAO odDAO = new OrderDetailDAO();
-        ArrayList<Integer> VehicleIDHaveCHeckedDate = odDAO.VehicleIDHaveCurDate();
-        request.setAttribute("VehicleIDHaveCHeckedDate", VehicleIDHaveCHeckedDate);
-        
-        String date = java.time.LocalDate.now().toString();
-        request.setAttribute("date", date);
-        
+        ArrayList<Integer> VehicleIDHaveCheckedDate = odDAO.VehicleIDHaveCurDate();
+        session.setAttribute("VehicleIDHaveCheckedDate", VehicleIDHaveCheckedDate);
+
+        String date = java.time.LocalDate.now().toString(); 
+        session.setAttribute("date", date);
+
         VehicleDAO cDAO = new VehicleDAO();
         Map<Integer, Vehicles> listCar = cDAO.getAllVehicles();
         request.setAttribute("listCar", listCar);

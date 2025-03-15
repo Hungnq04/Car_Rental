@@ -11,13 +11,12 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import dal.BillDAO;
 import dal.OrderDAO;
 /**
  *
  * @author Hung
  */
-public class Paid extends HttpServlet {
+public class deleteOrder extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -34,10 +33,10 @@ public class Paid extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Paid</title>");  
+            out.println("<title>Servlet deleteOrder</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Paid at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet deleteOrder at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -56,11 +55,9 @@ public class Paid extends HttpServlet {
     throws ServletException, IOException {
         //processRequest(request, response);
         int orderID = Integer.parseInt(request.getParameter("orderID"));
-        BillDAO bDAO = new BillDAO();
-        float totalAmount = bDAO.getTotalAmountByOrderID(orderID);
-        request.setAttribute("totalAmount", totalAmount);
-        request.setAttribute("OrderID", orderID);
-        request.getRequestDispatcher("payment.jsp").forward(request, response);
+        OrderDAO oDAO = new OrderDAO();
+        oDAO.deleteOrder(orderID);
+        response.sendRedirect("myOrder");
     } 
 
     /** 
@@ -73,14 +70,7 @@ public class Paid extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        //processRequest(request, response);
-        int orderID = Integer.parseInt(request.getParameter("orderID"));
-        BillDAO bDAO = new BillDAO();
-        bDAO.updateBill(orderID);
-        request.setAttribute("ms", "paid successfully");
-        OrderDAO oDAO = new OrderDAO();
-        oDAO.changeStatus(orderID);
-        request.getRequestDispatcher("payment.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /** 

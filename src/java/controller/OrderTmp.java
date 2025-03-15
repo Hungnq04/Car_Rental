@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import dal.VehicleDAO;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import model.Vehicles;
@@ -65,22 +66,22 @@ public class OrderTmp extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         int vehicleID = Integer.parseInt(request.getParameter("vehicleId"));
-        VehicleDAO vDAO = new VehicleDAO();
-        Vehicles car = vDAO.getVehicleById(vehicleID);
 
         HttpSession session = request.getSession();
         ArrayList<Vehicles> listBookedCar = (ArrayList<Vehicles>) session.getAttribute("listBookedCar");
-
-        if (listBookedCar == null) {
-            listBookedCar = new ArrayList<>();
-            session.setAttribute("listBookedCar", listBookedCar);
+        Iterator<Vehicles> iterator = listBookedCar.iterator();
+        while (iterator.hasNext()) {
+            Vehicles v = iterator.next();
+            if (v.getVehicleID() == vehicleID) {
+                iterator.remove();
+                break;
+            }
         }
-        listBookedCar.add(car);
         session.setAttribute("listBookedCar", listBookedCar);
 
         String date = request.getParameter("date");
         OrderDetailDAO odDAO = new OrderDetailDAO();
-        ArrayList<Integer> VehicleIDHaveCHeckedDate = odDAO.VehicleIDHaveCHeckedDate(date);
+        ArrayList<Integer> VehicleIDHaveCHeckedDate = odDAO.VehicleIDHaveCheckedDate(date);
         request.setAttribute("VehicleIDHaveCHeckedDate", VehicleIDHaveCHeckedDate);
         request.setAttribute("date", date);
 
@@ -101,7 +102,31 @@ public class OrderTmp extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        int vehicleID = Integer.parseInt(request.getParameter("vehicleId"));
+        VehicleDAO vDAO = new VehicleDAO();
+        Vehicles car = vDAO.getVehicleById(vehicleID);
+
+        HttpSession session = request.getSession();
+        ArrayList<Vehicles> listBookedCar = (ArrayList<Vehicles>) session.getAttribute("listBookedCar");
+
+        if (listBookedCar == null) {
+            listBookedCar = new ArrayList<>();
+            session.setAttribute("listBookedCar", listBookedCar);
+        }
+        listBookedCar.add(car);
+        session.setAttribute("listBookedCar", listBookedCar);
+
+        String date = request.getParameter("date");
+        OrderDetailDAO odDAO = new OrderDetailDAO();
+        ArrayList<Integer> VehicleIDHaveCHeckedDate = odDAO.VehicleIDHaveCheckedDate(date);
+        request.setAttribute("VehicleIDHaveCHeckedDate", VehicleIDHaveCHeckedDate);
+        request.setAttribute("date", date);
+
+        VehicleDAO cDAO = new VehicleDAO();
+        Map<Integer, Vehicles> listCar = cDAO.getAllVehicles();
+        request.setAttribute("listCar", listCar);
+        request.getRequestDispatcher("order.jsp").forward(request, response);
     }
 
     /**

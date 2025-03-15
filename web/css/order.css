@@ -15,7 +15,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     padding: 20px;
 }
 
-/* Hộp chứa mỗi xe */
 .car-container {
     display: flex;
     flex-direction: column;
@@ -28,7 +27,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     text-align: center;
 }
 
-/* Hình ảnh xe */
 .car-image img {
     width: 100%;
     height: 180px; /* Cố định chiều cao */
@@ -36,7 +34,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     border-radius: 10px;
 }
 
-/* Phần thông tin xe */
 .car-info {
     width: 100%;
     background-color: #f9f9f9;
@@ -45,7 +42,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Bảng thông tin */
 .car-info table {
     width: 100%;
 }
@@ -54,7 +50,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     padding: 5px;
 }
 
-/* Nút booking */
 .booking-button {
     margin-top: 10px;
     padding: 8px 15px;
@@ -67,11 +62,33 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     transition: background-color 0.3s;
 }
 
+.booked-button {
+    margin-top: 10px;
+    padding: 10px 18px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng nhẹ */
+    text-transform: uppercase;
+}
+
+.booked-button:hover {
+    background-color: #c82333; /* Màu đỏ đậm hơn khi hover */
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.booked-button:active {
+    transform: scale(0.95); /* Hiệu ứng bấm xuống */
+}
+
 .booking-button:hover {
     background-color: #0056b3;
 }
 
-/* Nút Fully Rented */
 .fully-rented {
     margin-top: 10px;
     padding: 8px;
@@ -84,7 +101,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15px; /* Khoảng cách giữa các phần tử */
+    gap: 15px; 
     padding: 20px;
     background: #f8f9fa;
     border-radius: 10px;
@@ -94,14 +111,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     margin-top: 80px;
 }
 
-/* Label: Chữ đẹp hơn */
 .date-container label {
     font-size: 18px;
     font-weight: bold;
     color: #333;
 }
 
-/* Ô chọn ngày */
 .date-container input[type="date"] {
     padding: 10px;
     font-size: 16px;
@@ -125,7 +140,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     box-shadow: 0 0 5px rgba(255, 87, 34, 0.5);
 }
 
-/* Nút xác nhận */
 .date-container input[type="submit"] {
     padding: 10px 15px;
     font-size: 16px;
@@ -164,14 +178,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     text-align: center;
 }
 
-/* Thiết lập bảng */
 .car-table {
     width: 100%;
     border-collapse: collapse;
     font-size: 16px;
 }
 
-/* Header bảng */
 .car-table th {
     background-color: #007bff;
     color: white;
@@ -180,20 +192,60 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     border-bottom: 2px solid #ddd;
 }
 
-/* Dòng dữ liệu */
 .car-table td {
     padding: 10px;
     border-bottom: 1px solid #ddd;
 }
 
-/* Hiệu ứng hover */
 .car-table tr:hover {
     background-color: #f1f1f1;
 }
 
-/* Viền bảng */
 .car-table {
     border: 2px solid #007bff;
     border-radius: 8px;
     overflow: hidden;
+}
+select[name="withDriver"] {
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    background-color: #f8f9fa;
+    border: 2px solid #007bff;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+select[name="withDriver"]:hover {
+    border-color: #0056b3;
+    background-color: #e9ecef;
+}
+
+select[name="withDriver"]:focus {
+    border-color: #ff5722;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(255, 87, 34, 0.5);
+}
+.car-details input[type="submit"] {
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #28a745;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.car-details input[type="submit"]:hover {
+    background-color: #218838;
+    box-shadow: 0px 3px 6px rgba(0, 128, 0, 0.3);
+}
+
+.car-details input[type="submit"]:active {
+    background-color: #1e7e34;
+    transform: scale(0.98);
 }

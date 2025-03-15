@@ -74,11 +74,11 @@
     <body>
         <div class="header">
             <div class="nav-bar">
-                <!-- Home bên trái -->
+
                 <div class="nav-left">
                     <a href="home.jsp">Rental Car</a>
                 </div>
-                <!-- Login & Register bên phải -->
+
                 <div class="nav-right">
                     <c:choose>
                         <c:when test="${sessionScope.account == null}">

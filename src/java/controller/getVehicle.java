@@ -17,7 +17,7 @@ import model.Vehicles;
 
 /**
  *
- * @author chang
+ * @author Hung
  */
 public class getVehicle extends HttpServlet {
    

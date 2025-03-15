@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="header.jsp" %>
+<%@include file="js/javascript.js" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,10 +17,10 @@
     </head>
     <body>
 
-        <form action="checkAvailableCar">
+        <form action="checkAvailableCar" method="get">
             <div class="date-container">
                 <label for="date">Select day:</label>
-                <input type="date" id="date" name="date" value="${requestScope.date}"/>
+                <input type="date" id="date" name="date" value="${sessionScope.date}" onfocus="this.value='';"/>
                 <input type="submit" value="Confirm"/>
             </div>
         </form>
@@ -29,11 +30,11 @@
             <c:forEach var="entry" items="${requestScope.listCar}">
                 <c:set var="car" value="${entry.value}"/>
                 <div class="car-container">
-                    <!-- Phần hình ảnh xe -->
+
                     <div class="car-image">
                         <img src="${car.imageLink}" alt="Car Image"/>
                     </div>
-                    <!-- Phần thông tin xe -->
+
                     <div class="car-info">
                         <table>
                             <tr>
@@ -53,16 +54,18 @@
                                 <td>${car.price} VND / Day</td>
                             </tr>
                         </table>
-                        <!-- Nút Booking -->
+
                         <c:set var="isFullyRented" value="false"/>
                         <c:set var="isBooked" value="false"/>
-                        <c:forEach var="id" items="${requestScope.VehicleIDHaveCHeckedDate}">
-                            <c:if test="${id eq car.VehicleID}">
+
+                        <c:forEach var="id" items="${sessionScope.VehicleIDHaveCheckedDate}">
+                            <c:if test="${id.toString() eq String.valueOf(car.getVehicleID())}">
                                 <c:set var="isFullyRented" value="true"/>
                             </c:if>
                         </c:forEach>
+
                         <c:forEach var="bookedCar" items="${sessionScope.listBookedCar}">
-                            <c:if test="${bookedCar.getVehicleID() eq car.getVehicleID()}">
+                            <c:if test="${bookedCar.vehicleID eq car.vehicleID}">
                                 <c:set var="isBooked" value="true"/>
                             </c:if>
                         </c:forEach>
@@ -72,11 +75,15 @@
                                 <div class="fully-rented"><a>Fully Rented</a></div>
                             </c:when>
                             <c:when test="${isBooked}">
-                                <div class="booked"><a>Booked</a></div>
+                                <form action="orderTmp" method="get">
+                                    <input type="hidden" name="date" value="${sessionScope.date}"/>
+                                    <input type="hidden" name="vehicleId" value="${car.getVehicleID()}"/>
+                                    <button type="submit" class="booked-button">Booked</button>
+                                </form>
                             </c:when>
                             <c:otherwise>
-                                <form action="orderTmp">
-                                    <input type="hidden" name="date" value="${requestScope.date}"/>
+                                <form action="orderTmp" method="post">
+                                    <input type="hidden" name="date" value="${sessionScope.date}"/>
                                     <input type="hidden" name="vehicleId" value="${car.getVehicleID()}"/>
                                     <button type="submit" class="booking-button">Booking</button>
                                 </form>
@@ -91,6 +98,7 @@
                 <div class="car-details">
                     <table class="car-table">
                         <tr>
+                            <th>Date</th>
                             <th>Brand</th>
                             <th>Model</th>
                             <th>Seats</th>
@@ -99,7 +107,8 @@
                         </tr>
                         <c:forEach var="car" items="${sessionScope.listBookedCar}">
                             <tr>
-                                <td>${car.brance}</td>
+                                <td>${sessionScope.date}</td>
+                                <td>${car.brand}</td>
                                 <td>${car.model}</td>
                                 <td>${car.seats}</td>
                                 <td>${car.price}</td>
@@ -114,10 +123,8 @@
                         </c:forEach>
                     </table>
                 </div>
-                <a class="total-amount">Total amount payable: ${requestScope.totalAmount}</a>
-                <input type="hidden" name="date" value="${requestScope.date}"/>
-                <input type="hidden" name="userID" value="${sessionScope.account.getUserID()}"/>
-                <input type="submit" value="Confirm"/>
+                <input type="hidden" name="date" value="${sessionScope.date}"/>
+                <input class="" type="submit" value="Confirm"/>
             </form>
         </c:if>
     </center>

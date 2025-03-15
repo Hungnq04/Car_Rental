@@ -4,5 +4,10 @@
  */
 
 function doPayment(orderID) {
-    window.location = "payment?orderID=" + orderID;
+    window.location = "pay?orderID=" + orderID;
+}
+function doDelete(orderID) {
+    if (confirm("Sure to delete this Order?")) {
+        window.location = "deleteOrder?orderID=" + orderID;
+    }
 }
